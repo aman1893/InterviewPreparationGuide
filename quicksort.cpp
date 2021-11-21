@@ -18,10 +18,16 @@ int partition(vector<int>& arr, int st, int end) {
     swap(arr[i+1], arr[end]);
     return i + 1;
 }
+//Adding tail call elimintaion to limit space complexity to O(log(n))
 void quicksort(vector<int>& arr, int st, int end) {
-    if(st < end) {
+    while(st < end) {
         int p = partition(arr, st, end);
-        quicksort(arr, st, p - 1);
-        quicksort(arr, p + 1, end);
+        if(p - st < end - p) {
+            quicksort(arr, st, p - 1);
+            st = p + 1;
+        } else {
+            quicksort(arr, p + 1, end);
+            end = p - 1;
+        }
     }
 }
