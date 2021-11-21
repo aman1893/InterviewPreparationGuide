@@ -1,4 +1,11 @@
+int getRandom(int lo, int hi) {
+    return lo + (rand() % (hi - lo + 1));
+}
 int partition(vector<int>& arr, int st, int end) {
+    //Adding randomization to quicksort
+    int randomIndex = getRandom(st, end);
+    swap(arr[randomIndex], arr[end]);
+    
     //invariant after processing jth element
     //small elements: [st, i], big elements: [i + 1 -> j]
     int pivot = arr[end], i = st - 1;
